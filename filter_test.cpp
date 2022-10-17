@@ -1,16 +1,43 @@
 #include "filter.h"
 #include "gtest/gtest.h"
+#include <vector>
 
-TEST(FilterTest,AnArray){
-  int image_size = 10;
-  int *image =new int[image_size]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+using namespace std;
+
+TEST(FilterTest,SameArrayWithVarriyingFilterSize){
+  vector<float> image {1,2,3,4,5,6,7,8,9,10};
+
   int filter_size = 3;
+  vector<float> expected_image {2,3,4,5,6,7,8,9};
+  vector<float> filtered_image = filter(image,filter_size);
+  EXPECT_EQ(expected_image,filtered_image);
 
-  int *expected_image = new int[8]{2,3,4,5,6,7,8,9};
-  int *filtered_image = filter(image,image_size,filter_size);
-  for(int i = 0; i < 8; i++){
-    EXPECT_EQ(expected_image[i],filtered_image[i]);
-  }
+  int filter_size1 = 2;
+  vector<float> expected_image1 {1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5};
+  vector<float> filtered_image1 = filter(image,filter_size1);
+  EXPECT_EQ(expected_image1,filtered_image1);
+}
+
+TEST(FilterTest,DifferentArrays){
+  vector<float> image {1,2,3,4,5};
+  int filter_size = 3;
+  vector<float> expected_image {2,3,4};
+  vector<float> filtered_image = filter(image,filter_size);
+  EXPECT_EQ(expected_image,filtered_image);
+
+  vector<float> image1 {1,2,3,4,5,6,7,8};
+  int filter_size1 = 2;
+  vector<float> expected_image1 {1.5,2.5,3.5,4.5,5.5,6.5,7.5};
+  vector<float> filtered_image1 = filter(image1,filter_size1);
+  EXPECT_EQ(expected_image1,filtered_image1);
+}
+
+TEST(FilterTest, ArrayWithPointNumbers){
+  vector<float> image {1.5,2.5,3.5,4.0,5.0};
+  int filter_size = 2;
+  vector<float> expected_image {2,3,3.75,4.5};
+  vector<float> filtered_image = filter(image,filter_size);
+  EXPECT_EQ(expected_image,filtered_image);
 }
 
 int main(int argc, char **argv) {

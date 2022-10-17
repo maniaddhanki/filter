@@ -1,17 +1,18 @@
 #include <iostream>
 #include "filter.h"
+#include <vector>
 
+using namespace std;
 
 int main()
 {
-  int image_size = 10;
-  int *image =new int[image_size]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  int filter_size = 3;
+  vector<float> image {1,2,3,4,5,6,7,8,9,10};
+  int image_size;
+  cin >> image_size;
+  vector<float> filtered_image = filter(image,image_size);
 
-  int *filtered_image = filter(image, image_size, filter_size);
-  for (size_t i = 0; i < 8; i++)
-  {
-    std::cout << *(filtered_image + i) << "\n";
+  cout << "out put is : \n";
+  for(int i = 0; i < filtered_image.size(); i++){
+    cout << filtered_image[i] << "\n";
   }
-  delete[] filtered_image;
 }

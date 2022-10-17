@@ -1,3 +1,5 @@
 build.sh
 out
 test
+test.sh
+.vscode

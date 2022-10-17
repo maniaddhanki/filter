@@ -1,3 +1,6 @@
 #pragma once
+#include <vector>
 
-int *filter(int *image, int image_size, int filter_size);
+using namespace std;
+
+vector<float> filter(vector<float>& image, int filter_size);
